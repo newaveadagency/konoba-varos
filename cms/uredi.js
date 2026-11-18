@@ -2,6 +2,7 @@
 (function () {
   "use strict";
   var C = window.CMS_CONFIG, GH = window.GH;
+  var L = window.CMS_L || function (s) { return s; };
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var frame = $("#frame"), panel = $("#panel");
@@ -237,7 +238,7 @@
   function act(a) {
     var el = S.sel; if (!el) return;
     if (a === "del") {
-      if (el.dataset.cmsShared && !confirm("Ovaj blok se nalazi na svim stranicama. Obrisati ga posvuda?")) return;
+      if (el.dataset.cmsShared && !confirm(L("Ovaj blok se nalazi na svim stranicama. Obrisati ga posvuda?"))) return;
       var next = el.nextElementSibling || el.previousElementSibling || el.parentElement;
       mutate(function () { el.remove(); S.sel = null; });
       if (next && next !== doc().body) select(next);
@@ -362,7 +363,7 @@
       b.onmousedown = function (e) { e.preventDefault(); };
       b.onclick = function () {
         var d = doc(), f = b.dataset.fmt;
-        if (f === "link") { var u = prompt("Adresa poveznice (npr. https://… ili tel:…)", "https://"); if (u) d.execCommand("createLink", false, u); }
+        if (f === "link") { var u = prompt(L("Adresa poveznice (npr. https://… ili tel:…)"), "https://"); if (u) d.execCommand("createLink", false, u); }
         else d.execCommand(f);
         setDirty(true); snapLater();
       };
@@ -489,7 +490,7 @@
       others.forEach(function (o) { files.push({ path: o.path, text: o.text }); });
       Object.keys(S.images).forEach(function (u) { if (html.indexOf(S.images[u].path) > -1 || others.some(function (o) { return o.text.indexOf(S.images[u].path) > -1; })) files.push({ path: S.images[u].path, buffer: S.images[u].buffer }); });
       var pg = (C.pages.filter(function (p) { return p.file === S.page; })[0] || {}).name || S.page;
-      var sha = await GH.commit("Uređivač: " + pg + (others.length ? " (+ " + others.map(function (o) { return o.name; }).join(", ") + ")" : ""), files, force ? null : expect);
+      var sha = await GH.commit(L("Uređivač: " + pg) + (others.length ? " (+ " + others.map(function (o) { return o.name; }).join(", ") + ")" : ""), files, force ? null : expect);
       S.head = await GH.head(); S.sha = S.head.files[S.page]; S.src = html;
       $$("[data-cms-shared]", doc()).forEach(function (el) { var c = el.cloneNode(true), w = doc().createElement("div"); w.appendChild(c); clean(w); S.shared[el.dataset.cmsShared] = finish(c.outerHTML, S.scripts); });
       setDirty(false); track(sha); S.busy = false;
@@ -547,7 +548,7 @@
 
   function initUI() {
     $("#siteName").textContent = C.siteName;
-    document.title = "Uređivač – " + C.siteName;
+    document.title = L("Uređivač – " + C.siteName);
     $("#pageSel").innerHTML = C.pages.map(function (p) { return '<option value="' + esc(p.file) + '">' + esc(p.name) + "</option>"; }).join("");
     $("#pageSel").onchange = function () { openPage(this.value); };
     $$("[data-dev]").forEach(function (b) { b.onclick = function () { $$("[data-dev]").forEach(function (x) { x.classList.toggle("on", x === b); }); $("#fw").classList.toggle("m", b.dataset.dev === "m"); }; });
