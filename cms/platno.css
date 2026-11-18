@@ -1,0 +1,15 @@
+/* Učitava se samo unutar uređivača (nikad na javnoj stranici) */
+html{scroll-behavior:auto!important}
+.rv,[class*="reveal"]{opacity:1!important;transform:none!important}
+#intro{display:none!important}
+iframe{pointer-events:none!important}
+a,button,summary,label,select,input{cursor:default!important}
+.cms-hover{outline:2px dashed rgba(37,99,235,.55)!important;outline-offset:2px!important}
+.cms-sel{outline:2px solid #2563eb!important;outline-offset:2px!important}
+[contenteditable]{cursor:text!important;outline:2px solid #2563eb!important;outline-offset:2px!important;box-shadow:0 0 0 6px rgba(37,99,235,.12)!important}
+[data-cms-dyn]{position:relative!important;min-height:140px}
+[data-cms-dyn]::after{content:"⟳  " attr(data-cms-dyn);position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:12px;background:repeating-linear-gradient(45deg,rgba(243,244,246,.94),rgba(243,244,246,.94) 12px,rgba(234,236,240,.94) 12px,rgba(234,236,240,.94) 24px);border:2px dashed #9ca3af;border-radius:14px;color:#374151;font:600 14px/1.4 system-ui,sans-serif;z-index:5}
+[data-cms-dyn]:empty{display:block}
+[data-cms-hidden]{display:block!important;opacity:.35!important;filter:grayscale(1)}
+[data-cms-hidden]::before{content:"Skriveno – ne prikazuje se posjetiteljima";display:block;background:#111827;color:#fff;font:600 12px system-ui;padding:6px 10px}
+[data-cms-lock]{cursor:not-allowed!important}

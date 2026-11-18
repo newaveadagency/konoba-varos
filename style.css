@@ -1,0 +1,262 @@
+/* Konoba Varoš – redizajn 2026 */
+@font-face{font-family:Onest;src:url(fonts/onest-latin.woff2) format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Onest;src:url(fonts/onest-latin-ext.woff2) format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Playfair;src:url(fonts/playfair-normal-latin.woff2) format("woff2");font-weight:400 700;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Playfair;src:url(fonts/playfair-normal-latin-ext.woff2) format("woff2");font-weight:400 700;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Playfair;font-style:italic;src:url(fonts/playfair-italic-latin.woff2) format("woff2");font-weight:400 700;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Playfair;font-style:italic;src:url(fonts/playfair-italic-latin-ext.woff2) format("woff2");font-weight:400 700;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  --ink:#1b211d; --ink2:#2c342f; --olive:#3d4a3f; --mute:#6f6a60; --line:#e4dccd;
+  --stone:#f6f1e7; --stone2:#efe7d8; --paper:#fbf8f2; --terra:#b2452c; --terra2:#943520; --gold:#c9a96e;
+  --r:6px; --wrap:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:88px}
+body{font:400 16px/1.65 Onest,system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.i{width:18px;height:18px;flex:none}
+h1,h2,h3{font-family:Playfair,Georgia,serif;font-weight:600;line-height:1.05;letter-spacing:-.01em}
+h2{font-size:clamp(32px,4vw,50px)}
+h2 em,h1 em{font-style:italic;font-weight:500;color:var(--terra)}
+section{padding:110px 0}
+.kick{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--terra)}
+.kick:before{content:"";width:28px;height:1px;background:currentColor}
+.lead{font-size:18px;color:var(--ink2);max-width:600px}
+.mute{color:var(--mute)}
+
+/* gumbi */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 28px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:.2s;white-space:nowrap}
+.btn-terra{background:var(--terra);color:#fff}.btn-terra:hover{background:var(--terra2)}
+.btn-ink{background:var(--ink);color:#fff}.btn-ink:hover{background:#000}
+.btn-line{border-color:rgba(255,255,255,.4);color:#fff}.btn-line:hover{background:rgba(255,255,255,.1)}
+.btn-ghost{border-color:var(--ink);color:var(--ink)}.btn-ghost:hover{background:var(--ink);color:#fff}
+.link{display:inline-flex;align-items:center;gap:8px;font-weight:600;border-bottom:1px solid currentColor;padding-bottom:2px}
+.link:hover{color:var(--terra)}
+
+/* zaglavlje */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,box-shadow .3s}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:84px}
+.nav.solid,.nav.always{background:rgba(251,248,242,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.logo{display:flex;align-items:center;gap:12px;color:#fff}
+.logo img{height:52px;width:auto}
+.logo .dk{display:none}
+.nav.solid .logo .lt,.nav.always .logo .lt{display:none}
+.nav.solid .logo .dk,.nav.always .logo .dk{display:block}
+.menu{display:flex;gap:4px;list-style:none;margin-left:auto}
+.menu a{display:block;padding:10px 14px;font-weight:500;font-size:15px;color:#fff;border-radius:999px;white-space:nowrap}
+.nav.solid .menu a,.nav.always .menu a{color:var(--ink2)}
+.menu a:hover,.menu a.on{background:rgba(255,255,255,.14)}
+.nav.solid .menu a:hover,.nav.solid .menu a.on,.nav.always .menu a:hover,.nav.always .menu a.on{background:var(--stone2)}
+.nav .cta{display:flex;gap:10px;align-items:center}
+.nav .tel{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:#fff}
+.nav.solid .tel,.nav.always .tel{color:var(--ink)}
+.nav .btn{height:46px;padding:0 22px}
+.burger{display:none;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;place-items:center;cursor:pointer}
+.nav.solid .burger,.nav.always .burger{border-color:var(--line);color:var(--ink)}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;background:#111 url(img/konoba-varos-galerija-0254.jpg) center 60%/cover;padding:0}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,20,18,.55) 0%,rgba(17,20,18,.15) 35%,rgba(17,20,18,.85) 100%)}
+.hero .wrap{position:relative;width:100%;padding-top:140px;padding-bottom:72px}
+.hero .kick{color:var(--gold)}
+.hero h1{font-size:clamp(42px,6.6vw,86px);max-width:900px;margin:20px 0 22px}
+.hero h1 em{color:#f0c9a4}
+.hero p{font-size:19px;max-width:560px;color:#e8e2d6}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.facts{position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid rgba(255,255,255,.25)}
+.facts div{padding:22px 24px 0 0;display:flex;gap:14px;align-items:flex-start}
+.facts .i{width:22px;height:22px;color:var(--gold);margin-top:3px}
+.facts small{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#bdb6a8}
+.facts b{font-weight:500}
+
+/* o nama */
+.about{display:grid;grid-template-columns:1fr 1.05fr;gap:80px;align-items:center}
+.about .pics{position:relative;padding:0 60px 60px 0}
+.about .pics img{border-radius:var(--r);width:100%;aspect-ratio:4/5;object-fit:cover}
+.about .pics img+img{position:absolute;right:0;bottom:0;width:48%;aspect-ratio:3/4;border:8px solid var(--paper)}
+.about .pics .badge{position:absolute;left:-18px;top:28px;background:var(--terra);color:#fff;padding:18px 22px;border-radius:var(--r);font-family:Playfair,Georgia,serif;line-height:1}
+.about .pics .badge b{display:block;font-size:40px;font-weight:600}
+.about .pics .badge span{font-family:Onest,sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.about h2{margin:18px 0 24px}
+.about p+p{margin-top:16px}
+.about .sig{margin-top:28px;display:flex;gap:28px;flex-wrap:wrap}
+
+/* peka */
+.peka{background:var(--ink);color:#f3ede2;position:relative;overflow:hidden}
+.peka .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.peka h2{color:#fff;margin:18px 0 18px}
+.peka .kick{color:var(--gold)}
+.peka p{color:#c9c2b4}
+.peka .ph{border-radius:var(--r);overflow:hidden;aspect-ratio:1/1}
+.peka .ph img{width:100%;height:100%;object-fit:cover}
+.plist{list-style:none;margin:30px 0;border-top:1px solid rgba(255,255,255,.12)}
+.plist li{display:flex;align-items:baseline;gap:14px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.plist b{font-family:Playfair,Georgia,serif;font-size:22px;font-weight:600;color:#fff}
+.plist span{color:#a9a294;font-size:14px}
+.plist .dots{flex:1;border-bottom:1px dotted rgba(255,255,255,.25);transform:translateY(-6px)}
+.plist .pr{font-family:Playfair,Georgia,serif;font-size:21px;color:var(--gold);white-space:nowrap}
+.note{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--gold)}
+
+/* jelovnik – kategorije */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+.cat{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;color:#fff;display:flex;align-items:flex-end;padding:22px}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.cat:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(17,20,18,.85))}
+.cat:hover img{transform:scale(1.05)}
+.cat div{position:relative;z-index:1}
+.cat h3{font-size:26px}
+.cat span{font-size:14px;color:#ddd5c6}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.sh p{margin-top:14px}
+
+/* proslave */
+.events{background:var(--stone)}
+.events .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:center}
+.events .ph{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.events .ph img{border-radius:var(--r);aspect-ratio:4/5;object-fit:cover;width:100%}
+.events .ph img:last-child{margin-top:48px}
+.events h2{margin:18px 0 20px}
+.ticks{list-style:none;margin:26px 0 32px;display:grid;gap:12px}
+.ticks li{display:flex;gap:12px;align-items:center}
+.ticks .i{color:var(--terra)}
+
+/* recenzije */
+.revs{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:44px}
+.rev{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:32px}
+.rev .st{color:var(--gold);letter-spacing:3px;font-size:15px}
+.rev blockquote{font-family:Playfair,Georgia,serif;font-style:italic;font-size:19px;line-height:1.5;margin:14px 0 18px;color:var(--ink2)}
+.rev cite{font-style:normal;font-weight:600;font-size:14px}
+.rev cite span{color:var(--mute);font-weight:400}
+
+/* galerija */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:12px;grid-auto-flow:dense;margin-top:44px}
+.gal a{border-radius:var(--r);overflow:hidden;display:block;cursor:zoom-in}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.gal a:hover img{transform:scale(1.05)}
+.gal a.t{grid-row:span 2}
+.gal a.w{grid-column:span 2}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,12,11,.95);display:none;align-items:center;justify-content:center;padding:60px 20px}
+.lb.open{display:flex}
+.lb img{max-height:100%;max-width:100%;border-radius:4px}
+.lb button{position:absolute;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.3);color:#fff;font-size:26px;cursor:pointer;display:grid;place-items:center}
+.lb .x{top:16px;right:16px}.lb .p{left:16px;top:50%;transform:translateY(-50%)}.lb .n{right:16px;top:50%;transform:translateY(-50%)}
+.lb .c{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#bbb;font-size:14px}
+
+/* rezervacija / kontakt */
+.book{background:var(--ink);color:#f3ede2}
+.book .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.book h2{color:#fff;margin:18px 0 18px}
+.book .kick{color:var(--gold)}
+.book p.lead{color:#c9c2b4}
+.info{display:grid;gap:12px;margin-top:34px}
+.info a,.info div{display:flex;gap:16px;align-items:center;padding:18px 20px;border:1px solid rgba(255,255,255,.12);border-radius:var(--r)}
+.info a:hover{border-color:var(--gold)}
+.info .ic{width:44px;height:44px;border-radius:50%;background:rgba(201,169,110,.15);color:var(--gold);display:grid;place-items:center;flex:none}
+.info small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9a9385}
+.form{background:var(--paper);color:var(--ink);border-radius:var(--r);padding:36px}
+.form h3{font-size:28px}
+.form p.s{color:var(--mute);font-size:14px;margin:6px 0 22px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fr3{grid-template-columns:1fr 1fr 1fr}
+.fi{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.fi label{font-size:13px;font-weight:600}
+.fi input,.fi select,.fi textarea{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;background:#fff;outline:0;font-size:15px;width:100%}
+.fi input:focus,.fi select:focus,.fi textarea:focus{border-color:var(--ink)}
+.fi textarea{min-height:96px;resize:vertical}
+.chk{display:flex;gap:10px;font-size:13px;color:var(--mute);margin:4px 0 18px;align-items:flex-start}
+.chk input{margin-top:3px;accent-color:var(--terra)}
+.form .btn{width:100%}
+.ok{display:none;padding:14px;border-radius:var(--r);background:#e9f2e6;color:#2f6b31;font-weight:600;margin-top:12px;font-size:14px}
+
+/* podnožje */
+footer{background:#121613;color:#9c9789;font-size:14px;padding:72px 0 28px}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+footer img{height:64px;width:auto;margin-bottom:18px}
+footer h4{color:#fff;font-family:Playfair,Georgia,serif;font-size:19px;font-weight:600;margin-bottom:14px}
+footer ul{list-style:none;display:grid;gap:8px}
+footer a:hover{color:#fff}
+footer .bot{grid-column:1/-1;border-top:1px solid #262b27;padding-top:22px;margin-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.fab{display:none}
+
+/* JELOVNIK stranica */
+.phead{position:relative;color:#fff;padding:180px 0 80px;background:#111 url(img/konoba-varos-galerija-9798.jpg) center/cover}
+.phead:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,20,18,.7),rgba(17,20,18,.8))}
+.phead .wrap{position:relative}
+.phead h1{font-size:clamp(46px,7vw,84px);margin-top:14px}
+.phead p{color:#ddd5c6;max-width:560px;margin-top:12px;font-size:18px}
+.phead .kick{color:var(--gold)}
+.mtabs{position:sticky;top:84px;z-index:20;background:rgba(251,248,242,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.mtabs .wrap{display:flex;gap:8px;align-items:center;overflow-x:auto;scrollbar-width:none;height:64px}
+.mtabs .wrap::-webkit-scrollbar{display:none}
+.mtabs a{flex:none;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:500;color:var(--ink2);white-space:nowrap}
+.mtabs a.on{background:var(--ink);color:#fff}
+.mtabs .sep{flex:none;width:1px;height:24px;background:var(--line);margin:0 6px}
+.msearch{flex:none;display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:0 14px;height:40px;margin-right:6px;background:#fff}
+.msearch input{border:0;outline:0;background:transparent;width:150px;font-size:14px}
+.mgroup{padding:56px 0 8px}
+.mgroup>h2{font-size:clamp(34px,4vw,48px);margin-bottom:6px}
+.mgroup>p{color:var(--mute);margin-bottom:22px}
+.mitems{display:grid;grid-template-columns:1fr 1fr;gap:0 56px}
+.mi{padding:18px 0;border-bottom:1px solid var(--line)}
+.mi .t{display:flex;align-items:baseline;gap:12px}
+.mi h3{font-size:19px;font-weight:600}
+.mi .dots{flex:1;border-bottom:1px dotted #c9bfae;transform:translateY(-6px)}
+.mi .pr{font-family:Playfair,Georgia,serif;font-size:19px;font-weight:600;color:var(--terra);white-space:nowrap}
+.mi p{font-size:14px;color:var(--mute);margin-top:2px}
+.mempty{display:none;text-align:center;padding:60px 0;color:var(--mute)}
+.mbreak{margin-top:72px;padding-top:40px;border-top:2px solid var(--ink)}
+
+/* GALERIJA stranica */
+.gal.big{grid-auto-rows:260px}
+
+/* animacija */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .menu{display:none}
+  .burger{display:grid}
+  .nav .cta{margin-left:auto}
+  .menu.open{display:flex;flex-direction:column;position:absolute;top:84px;left:0;right:0;background:var(--paper);padding:12px 16px 22px;border-bottom:1px solid var(--line);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+  .menu.open a{color:var(--ink);padding:14px 16px;font-size:18px}
+  .about,.peka .wrap,.events .wrap,.book .wrap{grid-template-columns:1fr;gap:48px}
+  .cats{grid-template-columns:repeat(2,1fr)}
+  .gal{grid-template-columns:repeat(3,1fr)}
+  footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:700px){
+  .wrap{padding:0 16px}
+  section{padding:72px 0}
+  .nav .wrap{height:72px;gap:12px}
+  .logo img{height:42px}
+  .nav .tel span,.nav .cta .btn{display:none}
+  .hero .wrap{padding-bottom:40px}
+  .hero p{font-size:17px}
+  .hero .btn{flex:1}
+  .facts{grid-template-columns:1fr;margin-top:36px}
+  .facts div{padding:14px 0 0}
+  .about .pics{padding:0 32px 40px 0}
+  .about .pics .badge{left:0}
+  .cats{grid-template-columns:1fr 1fr;gap:10px}.cat{padding:14px}.cat h3{font-size:20px}
+  .revs{grid-template-columns:1fr}.rev{padding:24px}.rev blockquote{font-size:17px}
+  .gal,.gal.big{grid-template-columns:1fr 1fr;grid-auto-rows:150px;gap:8px}
+  .gal a.w{grid-column:span 2}
+  .fr,.fr3{grid-template-columns:1fr}
+  .form{padding:24px 18px}
+  footer .wrap{grid-template-columns:1fr}
+  .sh{flex-direction:column;align-items:flex-start}
+  .mtabs{top:72px}
+  .mitems{grid-template-columns:1fr}
+  .mi h3{font-size:18px}
+  .phead{padding:130px 0 56px}
+  .fab{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;gap:8px}
+  .fab .btn{flex:1;height:52px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+  body{padding-bottom:76px}
+  .plist b{font-size:19px}
+}
